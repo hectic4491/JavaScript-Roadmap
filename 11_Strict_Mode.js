@@ -1,0 +1,5 @@
+// Strict Mode
+
+/**Strict Mode
+ * 
+ */
