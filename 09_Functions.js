@@ -83,10 +83,219 @@ function makeThrity(arr) {
   arr[0] = 30;
 }
 const myArray = [2, 3, 4];
-console.log(myArray);
+console.log(myArray); // [2, 3, 4]
 makeThrity(myArray);
-console.log(myArray);
+console.log(myArray); // [30, 3, 4]
 
-/**Types of function parameteres: Default and Rest
+
+/**Types of function parameters: Default and Rest
+ * The parameter is the name given to the variable declared inside the
+ * definition of a function. There are two special kinds of syntax: default
+ * and rest parameters.
  * 
+ * 
+ * Default Parameters:
+ * Default function parameters allow named parameters to be initialized
+ * with default values if no value or undefined is passed.
+ * 
+ * In the past, the general strategy for setting defaults was to test
+ * parameter values in the body of the function and assign a value if they
+ * are undefined.
+ * 
+ * In the following example, if no value is provided for b, it's value
+ * would be undefined when evaluating a*b, and a call to multiply would
+ * normally have return NaN. However, this is prevented by the second line
+ * in this example:
+ * 
+ * Note** This is the Ternary Operator  (Expression) ? (True) : False
+ */
+function multiply(a, b) {
+  b = (typeof b !== "undefined") ? (b) : (1);
+  return a*b;
+}
+console.log(multiply(5)); // 
+/**
+ * With default parameters, a manual check in the function body is no
+ * longer necessary. You can put 1 as the default value of b in the
+ * function head:
+ */
+function defaultMultiply(a, b = 1) {
+  return a * b;
+}
+console.log(defaultMultiply(3)); // 3
+
+/**Rest Parameters
+ * The rest parameter syntax allows us to represent an indefinite number of
+ * arguments as an array.
+ * 
+ * In the following example, the function uses 'rest parameters' to 
+ * collect arguments from the second one to the end. The function then
+ * multiplies these by the first argument.
+ */
+function multiplyBy(multiplier, ...args) {
+  return args.map((x) => multiplier * x);
+}
+const arr = multiplyBy(2, 1, 2, 3);
+console.log(arr); // [2, 4, 6]
+
+
+/**Arrow Functions
+ * An arrow function expression has a shorter syntax compared to function
+ * expressions and does not have its own 'this', 'arguments', 'super', or
+ * 'new.target'. Arrow functions are always anonymous.
+ */
+// e.g.:
+const sayHello = () => {
+  console.log("Hello from the Arrow Function !")
+}
+sayHello();
+ /**
+  * Two factors influenced the introduction of arrow functions: shorter
+  * functions and the non-binding of 'this'.
+  */
+
+ /**
+  * this...
+  * Need to look into more later.
+  */
+
+
+ /**IIFEs
+  * Immediately-invoked Function Expression is a function that is
+  * executed immediately after it is created:
+  */
+// standard IIFE:
+(function () {
+  console.log("Call this immediately!");
+})();
+
+// arrow function variant:
+(() => {
+  console.log("Immediate arrow function!");
+})();
+
+// async IIFE with arrow function:
+(async () => {
+  console.log("Do this async now!")
+})();
+
+
+/**Argument Object
+ * The arguement object is an array-like object accessible inside
+ * functions that contains the values of the arguments passed to that
+ * function, available within all non-arrow functions. You can refer to
+ * a function's arguments inside that function by using its argument 
+ * object. It has entries for each argument the function was called with,
+ * with the first entry's index at 0. But, in modern code, rest 
+ * parameters should be preferred.
+ */
+
+// argument object example:
+function myArgFunction(a, b, c) {
+  console.log(arguments[0]);
+  console.log(arguments[1]);
+  console.log(arguments[2]);
+}
+
+myArgFunction(7, 8, 9);
+// 7
+// 8
+// 9
+
+/**Function Stack (Call Stack)
+ * The function stack is how the interpreter keeps track of its place in
+ * a script that calls multiple functions, like which function is
+ * currently executing and which functions within that function are being
+ * called.
+ * 
+ * When a script calls a function, the interpreter adds it to the call
+ * stack and then starts carrying out the function.
+ * 
+ * Any functions that are called by that function are added to the call
+ * stack further up, and run where their calls are reached.
+ * 
+ * When the current function is finished, the interpreter takes it off
+ * the stack and resumes execution where it left off in the last code
+ * listing.
+ * 
+ * If the stack takes up more space than it was assigned, a "Stack
+ * overflow" error is thrown.
+ */
+
+// Let's look at a close example:
+function myGreeting() {
+  console.log("[1]");
+  sayHi();
+  console.log("[2]");
+}
+function sayHi() {
+  return console.log("Hi!");
+}
+myGreeting();
+console.log("[3]");
+// [1]
+// Hi!
+// [2]
+// [3]
+
+/**
+ * The call stack is empty at the very beginning.
+ * 1. Going from top to bottom, we first push the myGreeting() function
+ *    to the call stack per line 234.
+ * 2. Execute all code inside the myGreeting() function.
+ * -> [1]
+ * 3. Get to the sayHi() function invocation.
+ * 4. Push sayHi() to the call stack.
+ * 5. Execute all code inside the sayHi() function.
+ * -> Hi!
+ * 6. Return execution to the line that invoked sayHi() and continue
+ *    executing the rest of the myGreeting() function.
+ * 7. Pop sayHi() from the call stack.
+ * -> [2]
+ * 8. Return executing to the rest of the JS code.
+ * 9. Pop myGreeting() from the call stack.
+ * -> [3]
+ */
+
+
+/**Recursion
+ * One of the most powerful and elegant concepts of functions, recursion
+ * is when a function invokes itself. Such a function is called a 
+ * recursive function. As recursion happens, the underlying code of the
+ * recursive function gets executed again and again until a terminating
+ * condition, refered to as the 'base case' gets fulfilled.
+ * 
+ * Recursion and it's techniques is a deep topic and many algorithms 
+ * will utilize Recursion.
+ * 
+ * The most classical example is a fibonacci function.
+ */
+// return the nth term in the fibonacci sequence (starting from index 0)
+// 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
+function fibonacci(n) {
+  if (n === 0 || n === 1) {
+    return 1
+  } else return fibonacci(n-1) + fibonacci(n-2)
+}
+console.log(fibonacci(5)); // 8
+
+
+/**Built-in Functions
+ * There are a ton of built in Functions and Methods in JavaScript.
+ * 
+ * A JavaScript method is a property containing a function definition.
+ * i.e. when the data stored on an object is a function, we call that a
+ * method.
+ * 
+ * To differentiate between properties and methods, we can think of it
+ * this way: A property is what an object has, while a method is what
+ * an object does.
+ * 
+ * Since JavaScript methods are actions that can be performed on objects,
+ * we first need to have objects to start with. There are several objects
+ * built into JavaScript we can use.
+ * 
+ * Instead of listing them all here, just refer to a page that lists
+ * all the built in methods, like:
+ * https://www.tutorialspoint.com/javascript/javascript_builtin_functions.htm
  */

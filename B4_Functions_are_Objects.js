@@ -51,3 +51,11 @@ function applyFunction(func, value) {
 }
 // here we log the return. 
 console.log(applyFunction(square, 5));
+
+
+/**What happens when two functions have the same name?
+ * If two functions have the same name, the most recently defined function
+ * will overwrite the previous one. This behavior occurs because JavaScript
+ * uses a mechanism called "hoisting" which affects how functions and 
+ * variables are declared and initialized.
+ */
