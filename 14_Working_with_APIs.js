@@ -24,4 +24,51 @@
  * that return the data of the format JSON or XML. This method returns a
  * promise.
  * 
+ * The fetch() method of the 'window' interface starts the process of
+ * fetching a resource from the network, returning a promise that is
+ * fulfilled once the response is available.
+ * 
+ * The promise resolves to the Request object representing the response
+ * to your request.
+ * 
+ * A fetch() promise only rejects when the request fails, for example,
+ * because of a badly-formed request URL or a network error. A fetch()
+ * promise does not reject if the server responds with HTTP status codes
+ * that indicate errors (404, 500, etc.). Instead, a then() handler must
+ * check the Reponse.ok and/or Reponse.status properties.
+ * 
+ * The fetch() method is controlled by the connect-src directive of
+ * "Content Security Policy" rather than the directive of the resource
+ * it's retrieving.
+ * 
+ * **Note: The fetch() method's parameters are identical to those of the
+ *         Request() constructor.
+ * 
+ * Syntax:
+ * 
+ * fetch(resource)
+ * fetch(resource, options)
+ * 
+ * 
+ * Parameters:
+ *    resource - This defines the resource that you wish to fetch. This
+ *    can either be:
+ *      > A string or any other object with a stringifier - including a 
+ *        URL object - that provides the URL of the resource you want to
+ *        fetch. The URL may be relative to the base URL, which is the
+ *        document's 'baseURI' in a window context, or
+ *        WorkerGlobalScope.location in a worker context.
+ *      > A 'Request' object.
+ * 
+ *    options - A 'RequestInit' object containing any custom settings that
+ *    you want to apply to the request.
+ * 
+ * Return value:
+ *    A 'Promise' that resolves to a 'Response' object.
+ * 
+ * Exceptions:
+ *    AbortError
+ *    NotAllowedError
+ *    TypeError
  */
+
