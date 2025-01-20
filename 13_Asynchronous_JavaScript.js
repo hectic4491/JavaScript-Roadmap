@@ -147,4 +147,50 @@ const myInterval = setInterval((array) => {
  * manage extremely complex asynchronous code with rigorous error-
  * handling setup, write code in a more or less synchronous style, and
  * keep ourselves from running into callback hell.
+ * 
+ * Syntax: let promise = new Promise(function(resolve, reject) {
+ *    // executor (the code)
+ * });
+ * 
+ * 
+ * "Producing code" is code that can take some time.
+ * 
+ * "Consuming code" is code that must wait for the result.
+ * 
+ * A Promise is an object that links Producing code and Consuming code.
+ */
+/*
+A Promise contais both the producing code and calls to the consuming
+code:
+*/
+let myPromise = new Promise(function(myResolve, myReject) {
+  // "Producing Code" (May take some time)
+
+  myResolve(); // when successful
+  myReject(); // when error
+});
+// "Consuming Code" (Must wait for a fulfilled Promise)
+myPromise.then(
+  function(value) { /* code if successful */ },
+  function(error) { /* code if some error */ }
+);
+
+/**Promise Object Properties:
+ * A JavaScript Promise object can be:
+ * > Pending
+ * > Fulfilled
+ * > Rejected
+ * 
+ * The Promise object supports two properties: state and result.
+ * While a Promise object is "pending" (working), the result in undefined.
+ * While a Promise object is "fulfilled", the result is a value.
+ * While a Promise object is "rejected", the result is an error object.
+ * 
+ * myPromise.state        myPromise.result
+ * "pending"              undefined
+ * "fulfilled"            a result value
+ * "rejected"             en error object
+ * 
+ * You cannot access the Promise property state and result.
+ * You must use a Promise method to handle promises.
  */
