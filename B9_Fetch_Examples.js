@@ -34,5 +34,5 @@ fetch(src)
 
 // When we don't provide an error catch, we just return an empty object {}
 fetch(src)
-  .then(reponse => reponse.json())
+  .then(response => response.json())
   .then(data => console.log(data));
