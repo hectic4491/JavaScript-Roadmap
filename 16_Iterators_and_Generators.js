@@ -119,3 +119,9 @@ myTens[Symbol.iterator] = function() {
 for (const n of myTens) {
   console.log(n);
 }
+
+
+
+/**Generators
+ * ...
+ */
