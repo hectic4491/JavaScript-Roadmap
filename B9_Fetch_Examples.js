@@ -1,20 +1,21 @@
 /**Using JSONPlaceholder to fetch dummydata.
  * """https://jsonplaceholder.typicode.com"
  * 
- * /posts
- * /comments
- * /albums
- * /photos
- * /todos
- * /users
- * 
+ *    /posts
+ *    /comments
+ *    /albums
+ *    /photos
+ *    /todos
+ *    /users
  */
+
+
+// HTTP GET method practice
 
 
 const src = "https://jsonplaceholder.typicode.com/error"
 // const src = "https://jsonplaceholder.typicode.com/posts"
 // const src = "https://jsonplaceholder.typicode.com/comments"
-
 
 
 fetch(src)
@@ -36,3 +37,6 @@ fetch(src)
 fetch(src)
   .then(response => response.json())
   .then(data => console.log(data));
+
+
+//HTTP POST method practice
