@@ -149,7 +149,88 @@ console.log(Boolean(myResult)); // false
  * description. Symbols can be created using the Symbol() function, and
  * their primary use case is to add hidden or special properties to objects
  * that won't interfere with other properties or methods.
+ * 
+ * 
+ * Symbol is a built-in object whose constructor returns a symbol
+ * primitive — also called a Symbol value or just a Symbol — that's
+ * guaranteed to be unique. Symbols are often used to add unique property
+ * keys to an object that won't collide with keys any other code might
+ * add to the object, and which are hidden from any mechanisms other code
+ * will typically use to access the object. That enables a form of weak
+ * encapsulation, or a weak form of information hiding.
+ * 
+ * Every Symbol() call is guaranteed to return a unqiue Symbol. Every 
+ * Symbol.for("key") call will always return the same Symbol for a given
+ * value of "key". When Symbol.for("key") is called, if a Symbol with
+ * the given key can be found in the global Symbol registry, that Symbol
+ * is returned. Otherwise, a new Symbol is created, added to the global
+ * Symbol registry under the given key, and returned.
+ * 
+ * To create a new primitive Symbol, you write Symbol() with an optional
+ * string as its description:
+ */
+const sym1 = Symbol();
+const sym2 = Symbol("foo");
+const sym3 = Symbol("foo");
+/**
+ * The above code creates three new Symbols. Note that Symbol("foo") does
+ * not coerce the string "foo" into a Symbol. It creates a new Symbol
+ * each time:
+ */
+console.log(Symbol("foo") === Symbol("foo")); // false
+console.log(sym2 === sym3); // false
+/**
+ * The following syntax with the new operator will throw a TypeError:
+ * const sym = new Symbol();
  */
 
-// Come back to this later...
 
+/**Symbols, introduced in ES6, are unique and immutable data types that
+ * can be used as identifiers for object properties. They are guaranteed
+ * to be unique, so even if two symbols have the same description, they
+ * will not be the same. Here's how they can be particuarly useful:
+ * 
+ * Use Cases:
+ * 
+ * 1. Unique Property Keys: Symbol keys ensure that no property conflicts
+ * occur. This is especially useful when intergrating with external code
+ * or libraries.
+ * 
+ * 2. Hidden Properties: Symbols can be used to add properties to an 
+ * object that won't show up in a typical enumeration.
+ * 
+ * 3. Constants: They can be used to define constants that are unique
+ * identifiers.
+ */
+
+// Using Symbols as Object Properties
+const mySymbol = Symbol('mySymbol');
+const obj = {
+  name: "Robert",
+  age: 27
+};
+
+obj[mySymbol] = 'Hello, Symbol!';
+console.log(obj[mySymbol]); // "Hello, Symbol!"
+
+// The Symbol property doesn't show up in for...in loops or Object.keys:
+for (let key in obj) {
+  console.log(key); // name   age
+}
+console.log(Object.keys(obj)); // ['name', 'age']
+
+
+/**Symbol Methods:
+ * 
+ * Symbol.for(key): Reuses symbols from a shared registry, if a symbol 
+ * with the given key already exists, it returns that symbol.
+ * 
+ * Symbol.keyFor(sym): Retrieves a shared symbol's key from the global
+ * symbol registry.
+ */
+
+const globalSym = Symbol.for('global');
+const sameSym = Symbol.for('global');
+
+console.log(globalSym === sameSym); // true
+console.log(Symbol.keyFor(globalSym)); // 'global'

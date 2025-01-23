@@ -13,8 +13,8 @@
 // HTTP GET method practice
 
 
-const src = "https://jsonplaceholder.typicode.com/error"
-// const src = "https://jsonplaceholder.typicode.com/posts"
+// const src = "https://jsonplaceholder.typicode.com/error"
+const src = "https://jsonplaceholder.typicode.com/posts"
 // const src = "https://jsonplaceholder.typicode.com/comments"
 
 
@@ -40,3 +40,18 @@ fetch(src)
 
 
 //HTTP POST method practice
+
+const data = {
+  title: "This is my title",
+  body: "This is the post's body.",
+  userId: 9
+}
+
+fetch(src, {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: {
+    "Content-type": "applications/json"
+  }
+})
+
