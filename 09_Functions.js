@@ -299,3 +299,72 @@ console.log(fibonacci(5)); // 8
  * all the built in methods, like:
  * https://www.tutorialspoint.com/javascript/javascript_builtin_functions.htm
  */
+
+
+/**Lexical Scoping
+ * Before one can make an intuition of closures in JavaScript, it's
+ * important to first get a hang of the term 'lexical environment'. In
+ * simple words, the lexical environment for a function 'f' simply refers
+ * to the environment enclosing that function's definition in the source
+ * code.
+ */
+
+
+/**Closures
+ * Function closures are one of the most powerful, yet most misunderstood,
+ * concepts of JavaScript that are actually really simple to understand. A
+ * closure refers to a function along with its lexical environment. It is
+ * essentially what allows us to return a function A, from another
+ * function B,  that remembers the local variables defined in B, even
+ * after B exits. The idea of closures is employed in nearly every other
+ * JavaScript program, hence, it's paramount for a JavaScript developer
+ * to know it really well.
+ */
+
+
+/**"""mdn""" Closures
+ * 
+ * A closure is the combination of a function bundled together (enclosed)
+ * with references to its surrounding state (the lexical environment).
+ * In other words, a closure gives a function access to its outer scope.
+ * In JavaScript, closures are created every time a function is created,
+ * at function creation time.
+ */
+
+
+//Lexical Scoping.    consider the following example code:
+
+function init() {
+  var name = "Mozilla";
+  // name is a local variable created by init.
+
+  function displayName() {
+    // displayName() is the inner function, that forms a closure.
+    console.log(name)
+    // use variable declared in the parent function
+  }
+
+  displayName();
+}
+
+init(); // Mozilla
+
+
+/**
+ * init() creates a local variable called name and a function called
+ * displayName(). The displayName() function is an inner function that
+ * is defined inside init() and is available only within the body of the
+ * init() function. Note that the displayName() function has no local
+ * variables of its own. However, since inner functions have access to the
+ * variables of outer scope, displayName() can access the variable name
+ * declared in the parent function, init().
+ * 
+ * This is an example of lexical scoping, which describes how a parser 
+ * resolves variable names when functions are nested. The word 'lexical'
+ * refers to the fact that lexical scoping uses the location where a 
+ * variable is declared within the source code to determine where that
+ * variable is available. Nested functions have access to variables
+ * declared in their outer scope.
+ * 
+ * ... Continue later...
+ * */
