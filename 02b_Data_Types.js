@@ -219,8 +219,6 @@ console.log(typeof myPenObj); // object
  * which another object inherits properties. To create complex programs
  * using JavaScript, one has to be proficient in working with
  * prototypes - they form the very core of OOP in the language.
- * 
- * Come back to later...
  */
 
 
@@ -231,7 +229,6 @@ console.log(typeof myPenObj); // object
  * the properties and methods of another object. Traditonally, in order to
  * get and set the Prototype of an object, we use Object.getPrototypeOf and
  * Object.setPrototypeOf.
- * 
- * Come back to later...
  */
 
+// Continue reading out Prototypes in chapter B10
