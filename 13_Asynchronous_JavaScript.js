@@ -194,3 +194,9 @@ myPromise.then(
  * You cannot access the Promise property state and result.
  * You must use a Promise method to handle promises.
  */
+
+
+/**Promises and async/await
+ * 
+ * To be continued...
+ */
