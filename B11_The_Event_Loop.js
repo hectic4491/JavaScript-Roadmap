@@ -211,6 +211,203 @@ const baz = bar(7); // assigns 42 to baz.
  * Legacy exceptions exist like 'alert' or synchronous XHR, but it is 
  * considered good practice to avoid them. Beware: exceptions to the
  * exception do exist (but are usually implementation bugs, rather than
- * anything els ).
+ * anything else).
+ */
+
+
+
+/**More notes from: https://www.youtube.com/watch?v=8aGhZQkoFbQ
  * 
+ * The call stack.
+ * one thread == one call stack == one thing at a time.
+ * 
+ * JavaScript is a single threaded programming language.
+ * A single threaded runtime.
+ * Which means it has a single callstack.
+ * 
+ * Let's see what this means:
+ */
+
+// Example 1: Visualizing the stack.
+
+// Imagine the script began here:
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function square(n) {
+  return multiply(n, n);
+}
+
+function printSquare(n) {
+  var squared = square(n);
+  console.log(squared);
+}
+
+printSquare(4); // 16
+
+/**Stack...
+ * The stack (call stack) is a data structure which "records where in the
+ * program we are". So if we step into a function, we push something
+ * onto the stack, if we return from a function, we pop off from the
+ * stack. When we run the file, we have a main() function (think of it
+ * as the file itself) pushed into the stack as the first element.
+ * 
+ * ||  stack         ||
+ * ||                ||
+ * ||  main()        ||
+ * 
+ * As we go through our file, we define some functions, but the first
+ * call happens at the end, so the next push looks like this:
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * Then inside of printSquare, we call square().
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || square(n)      ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * Then, while calling square, we call multiply().
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || multiply(n, n) ||
+ * || square(n)      ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * multiply() is the first function to return something, so we multiply
+ * their values and return them to square. Thus we pop multiply().
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || square(n)      ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * square() immediately returns the return value of multiply(), so we 
+ * pop square().
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * We then proceed to the next function call in printSquare() which is
+ * console.log()
+ *
+ * ||   stack        ||
+ * ||                ||
+ * || console.log()  ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * There isn't an explicit return with console.log(), but it's implicit.
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || printSquare(4) ||
+ * || main()         ||
+ * 
+ * There isn't an explicit return with printSquare() but it's implicit
+ * because we got to the end of the function.
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * || main()         ||
+ * 
+ * Script finishes.
+ * 
+ * ||   stack        ||
+ * ||                ||
+ * 
+ * 
+ * Q.E.D.
+ * */
+
+// Example 2: stack trace
+
+// Imagine the script starts here
+
+// function aaa() {
+//   throw new Error('Oops!');
+// }
+
+// function bbb() {
+//   aaa();
+// }
+
+// function ccc() {
+//   bbb();
+// }
+
+// ccc();
+
+/**Because the throw an error, our console essentially prints the stack
+ * trace, i.e. the state of the stack at the time of the error.
+ * 
+ * 
+ * Error: Oops!
+ * at aaa...
+ * at bbb...
+ * at ccc...
+ * 
+ * 
+ * Q.E.D.
+ */
+
+// Example 3: Blowing the stack.
+
+function infRecursion() {
+  return infRecursion();
+}
+
+infRecursion(); // RangeError: Maximum call stack size exceeded
+
+/**
+ * i.e.:
+ * 
+ * ||   stack        ||
+ * || ...            ||
+ * || infRecursion() ||
+ * || infRecursion() ||
+ * || infRecursion() ||
+ * || infRecursion() ||
+ * || main()         ||
+ * 
+ * Q.E.D.
+ */
+
+
+/**blocking
+ * 
+ * What happens when things get slow?
+ * This is where we start to discuss blocking.
+ * 
+ * console.log() isn't slow, but a while loop from one to ten billion
+ * is slow, network requests are slow, image processing is slow... etc.
+ * 
+ * Things which are slow and on our callstack are "blocking".
+ * 
+ * This can cause issues when using a web application, because it would
+ * prevent users for further interaction until the blocking call is
+ * finished. Moreover, in the meantime, the meandering clicking events of
+ * things on the page will be caught and then processed suddendly when
+ * the blocking clears.
+ * 
+ * So what's the solutuion?
+ */
+
+
+/**Asynchronous callbacks
+ * 
+ * There are almost no blocking functions in the browser, as well as
+ * node.js; they are mostly asynchronous.
  */
