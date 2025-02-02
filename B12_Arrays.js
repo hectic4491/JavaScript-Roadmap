@@ -55,7 +55,8 @@ Adding Elements:
 push(): Adds one or more elements to the end of an array.
 unshift(): Adds one or more elements to the beginning of an array.
 */
-arr.push(4); // arr = [ 1, 15, 3, 4 ]
+arr.push(4); // arr = [ 1, 'A string!' 15, 3, 4 ]
+arr.unshift(0); // arr = [ 0, 1, 'A string!', 3, 4 ]
 
 /*
 Removing Elements:
@@ -220,3 +221,33 @@ thisArray.splice(1, 0, 2, 3);
 // Replacing
 thisArray.splice(2, 3, 7, 7, 7); // [ 1, 2, 7, 7, 7 ]
 thisArray.splice(1, 3, 10); // [ 1, 10, 7 ] 
+
+/**
+ * Recap:
+ * All arrays have the built-in method of .length.
+ * i.e.: myArray.length will return the length of the array.
+ * 
+ * push()
+ * unshift()
+ * 
+ * pop()
+ * shift()
+ * 
+ * indexOf()
+ * includes()
+ * find()
+ * 
+ * forEach()
+ * map()
+ * 
+ * filter()
+ * reduce()
+ * 
+ * concat()
+ * slice()
+ * 
+ * sort()
+ * reverse()
+ * 
+ * splice()
+ */
