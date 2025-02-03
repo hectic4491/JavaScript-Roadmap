@@ -8,5 +8,6 @@ The 'bonus' chapters starting with B refer to my personal chapter notes.
 
 
 
-Main Chapters and Topics:
-B12 - All the familiar ways to interact with arrays
+Reference Chapters:
+B12 - All the familiar ways to interact with arrays.
+B14 - Objets and the special way JavaScript uses them.

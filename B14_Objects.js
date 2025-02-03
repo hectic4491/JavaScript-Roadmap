@@ -86,8 +86,6 @@ Object.assign(target, source)
 console.log(target); // { a: 1, b: 2 }
 
 
-
-
 // Tests
 
 let myObject = {
