@@ -17,3 +17,15 @@
  * -> When the app is finished, we just have to bundle the code to
  *    using a bundler to make it more performant and standard.
  */
+
+
+/**Seperating Files
+ * 
+ * -> If the main script element in our HTML points to a main.js script
+ *    that adds the other javascript files to other script elements in
+ *    the head of the HTML document, we effectively seperate our 
+ *    JavaScript into more contained modules. The main.js element should
+ *    be called at the end of the HTML document to ensure all the elements
+ *    have been loaded. Then we can freely append them to the head of the
+ *    document for organization without error.
+ */
